@@ -233,7 +233,7 @@ async def activate_account(
     await db.delete(token_record)
     await db.commit()
 
-    login_link = "http://127.0.0.1/api/v1/accounts/login/"
+    login_link = "http://127.0.0.1/accounts/login/"
 
     background_tasks.add_task(
         email_sender.send_activation_complete_email,
@@ -415,7 +415,7 @@ async def reset_password(
             detail="An error occurred while resetting the password."
         )
 
-    login_link = "http://127.0.0.1/api/v1/accounts/login/"
+    login_link = "http://127.0.0.1/accounts/login/"
 
     background_tasks.add_task(
         email_sender.send_password_reset_complete_email,

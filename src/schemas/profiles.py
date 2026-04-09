@@ -6,12 +6,11 @@ import validation
 
 
 class ProfileSchema(BaseModel):
-    first_name: str = Form(...)
-    last_name: str = Form(...)
-    gender: str = Form(...)
-    date_of_birth: date = Form(...)
-    info: str = Form(...)
-    avatar: UploadFile = File(...)
+    first_name: str
+    last_name: str
+    gender: str
+    date_of_birth: date
+    info: str
 
 
 class ProfileCreateSchema(ProfileSchema):

@@ -62,6 +62,14 @@ async def create_user_profile(
         db: AsyncSession = Depends(get_db)
 ) -> ProfileResponseSchema:
 
+    result = await db.execute(select(UserModel).filter(UserModel.id == user_id))
+    user = result.scalars().first()
+    if not user or not user.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User not found or not active."
+        )
+
     if current_user.group.name != UserGroupEnum.ADMIN and current_user.id != user_id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
